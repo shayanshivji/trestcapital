@@ -19,6 +19,9 @@
     "react-dom": "^19.0.0",
     "tailwind-merge": "^2.6.0"
   },
+  "engines": {
+    "node": ">=18.x"
+  },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.9",
     "@types/node": "^22.10.0",
