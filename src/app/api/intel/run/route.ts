@@ -2,7 +2,11 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { createServiceClient } from "@/lib/supabase-server";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+export const dynamic = "force-dynamic";
+
+function getOpenAI() {
+  return new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
+}
 
 interface ScrapedItem {
   source_type: string;
@@ -147,7 +151,7 @@ async function parseWithAI(items: ScrapedItem[]): Promise<any[]> {
 
   for (const item of items) {
     try {
-      const response = await openai.chat.completions.create({
+      const response = await getOpenAI().chat.completions.create({
         model: "gpt-4o-mini",
         response_format: { type: "json_object" },
         messages: [
